@@ -1,9 +1,12 @@
-import express from 'express'
+import express from "express";
+import cors from "cors";
+import apiRoutes from "./routes/api";
 
-const app = express()
+const app = express();
 
-app.get('', (req, res)=> {
+app.use(express.json());
+app.use(cors());
 
-})
+app.use("/", apiRoutes);
 
-app.listen(3000)
+app.listen(3000);
