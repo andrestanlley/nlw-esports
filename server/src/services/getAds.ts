@@ -11,8 +11,8 @@ const getAds = async (req: Request, res: Response) => {
       weekDays: true,
       useVoiceChannel: true,
       yearsPlaying: true,
-      hourStart: true,
-      hourEnd: true,
+      hoursStart: true,
+      hoursEnd: true,
     },
     where: {
       gameId,
@@ -26,8 +26,8 @@ const getAds = async (req: Request, res: Response) => {
       return {
         ...ad,
         weekDays: ad.weekDays.split(","),
-        hourStart: convertMinutesToHourString(ad.hourStart),
-        hourEnd: convertMinutesToHourString(ad.hourEnd),
+        hoursStart: convertMinutesToHourString(ad.hoursStart),
+        hoursEnd: convertMinutesToHourString(ad.hoursEnd),
       };
     })
   );

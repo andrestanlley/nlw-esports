@@ -9,8 +9,8 @@ const createAd = async (req: Request, res: Response) => {
     yearsPlaying,
     discord,
     weekDays,
-    hourStart,
-    hourEnd,
+    hoursStart,
+    hoursEnd,
     useVoiceChannel,
   } = req.body;
 
@@ -21,8 +21,8 @@ const createAd = async (req: Request, res: Response) => {
       yearsPlaying,
       discord,
       weekDays: weekDays.join(","),
-      hourStart: convertHourStringToMinutes(hourStart),
-      hourEnd: convertHourStringToMinutes(hourEnd),
+      hoursStart: convertHourStringToMinutes(hoursStart),
+      hoursEnd: convertHourStringToMinutes(hoursEnd),
       useVoiceChannel,
     },
   });

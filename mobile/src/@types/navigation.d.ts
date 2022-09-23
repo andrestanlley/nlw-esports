@@ -1,12 +1,14 @@
+export interface GameParams {
+  id: string;
+  title: string;
+  bannerUrl: string;
+}
+
 export declare global {
-    namespace ReactNavigation {
-        interface RootParamsList {
-            home: undefined;
-            game: {
-                id: string;
-                title: string;
-                bannerUrl: string;
-            };
-        }
+  namespace ReactNavigation {
+    interface RootParamList {
+      home: undefined;
+      game: GameParams;
     }
+  }
 }
