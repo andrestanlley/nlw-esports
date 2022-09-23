@@ -1,4 +1,4 @@
-const baseurl = 'http://192.168.1.107:3000';
+const baseurl = 'http://192.168.1.113:3000';
 
 export async function getGames(setGames: Function) {
   const request = await fetch(`${baseurl}/games`);
