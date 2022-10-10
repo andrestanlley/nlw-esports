@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
-import logoImg from "./assets/logo.svg";
-import CreateAdModal from "./components/CreateAdModal";
-import GameBanner from "./components/GameBanner";
-import api from "./services/api";
-import CreateAdBanner from "./components/CreateAdBanner";
+import { useState, useEffect } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+import logoImg from './assets/logo.svg';
+import CreateAdModal from './components/CreateAdModal';
+import GameBanner from './components/GameBanner';
+import { getGames } from './services/api';
+import CreateAdBanner from './components/CreateAdBanner';
 
-interface Game {
+export interface Game {
   id: string;
   title: string;
   bannerUrl: string;
@@ -19,24 +19,19 @@ function App() {
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    getGames();
+    getGames(setGames);
   }, []);
-
-  async function getGames() {
-    const request = await fetch(api.getGames);
-    const result = await request.json();
-    setGames(result);
-  }
 
   return (
     <div className="max-w-[1344px] mx-auto flex flex-col items-center m-20">
       <img src={logoImg} />
 
       <h1 className="text-6xl text-white font-black mt-20">
-        Seu{" "}
+        Seu{' '}
         <span className="bg-nlw-gradient bg-clip-text text-transparent">
-          duo
-        </span>{" "}
+          {' '}
+          duo{' '}
+        </span>{' '}
         está aqui.
       </h1>
 
@@ -52,7 +47,7 @@ function App() {
       </div>
       <Dialog.Root>
         <CreateAdBanner />
-        <CreateAdModal />
+        <CreateAdModal games={games} />
       </Dialog.Root>
     </div>
   );

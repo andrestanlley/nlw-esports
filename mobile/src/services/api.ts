@@ -11,3 +11,9 @@ export async function getAds(gameId: string, setAds: Function) {
   const result = await request.json();
   setAds(result);
 }
+
+export async function getDiscordUser(adsId: string, setDiscordDuoSelected: Function){
+  const request = await fetch(`${baseurl}/ads/${adsId}/discord`)
+  const result = await request.json()
+  setDiscordDuoSelected(result.discord)
+}

@@ -15,7 +15,6 @@ export function Home() {
   const navigation = useNavigation();
 
   function handleOpenGame({ id, title, bannerUrl }: GameCardProps) {
-    console.log('entrei aqui ;DD');
     navigation.navigate('game', { id, title, bannerUrl });
   }
 

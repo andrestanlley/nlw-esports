@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { FlatList, Image, TouchableOpacity, View, Text } from 'react-native';
 
+import { DuoMatch } from '../../components/DuoMatch';
 import { THEME } from '../../theme';
 import { styles } from './styles';
 import { Background } from '../../components/Background';
@@ -12,12 +13,13 @@ import { Heading } from '../../components/Heading';
 import { GameParams } from '../../@types/navigation';
 import logoImg from '../../assets/logo-nlw-esports.png';
 import { DuoCard, DuoCardProps } from '../../components/DuoCard';
-import { getAds } from '../../services/api';
+import { getAds, getDiscordUser } from '../../services/api';
 
 export function Game() {
   const route = useRoute();
   const game = route.params as GameParams;
   const [ads, setAds] = useState<DuoCardProps[]>([]);
+  const [discordDuoSelect, setDiscordDuoSelected] = useState('');
 
   useEffect(() => {
     getAds(game.id, setAds);
@@ -59,13 +61,21 @@ export function Game() {
           data={ads}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <DuoCard data={item} onConnect={() => console.log('abriu modal')} />
+            <DuoCard
+              data={item}
+              onConnect={() => getDiscordUser(item.id, setDiscordDuoSelected)}
+            />
           )}
           ListEmptyComponent={() => (
             <Text style={styles.emptyListText}>
               Não há anúncios publicados ainda.
             </Text>
           )}
+        />
+        <DuoMatch
+          onClose={() => setDiscordDuoSelected('')}
+          visible={discordDuoSelect.length > 0}
+          discord={discordDuoSelect}
         />
       </SafeAreaView>
     </Background>
